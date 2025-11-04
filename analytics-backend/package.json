@@ -1,0 +1,27 @@
+{
+  "name": "analytics-backend-mongo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "worker": "ts-node-dev --respawn --transpile-only src/workers/processor.ts",
+    "aggregator": "ts-node-dev --respawn --transpile-only src/workers/aggregator.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "@fastify/rate-limit": "^7.0.0",
+    "bullmq": "^1.80.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.22.0",
+    "fastify-helmet": "^10.0.0",
+    "ioredis": "^5.3.2",
+    "mongoose": "^8.5.0",
+    "socket.io": "^4.7.2",
+    "zod": "^3.23.8",
+    "dayjs": "^1.11.10"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.2"
+  }
+}
