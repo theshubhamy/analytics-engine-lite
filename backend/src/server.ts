@@ -11,7 +11,10 @@ import { Queue } from './queue';
 import { startRealtimeEmitter } from './utils/realtimeEmitter';
 
 (async () => {
-  await mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/analytics');
+  await mongoose.connect(
+    process.env.MONGO_URL || 'mongodb://localhost:27017/analytics',
+  );
+
   const app = Fastify({ logger: true });
   await app.register(cors);
   await app.register(helmet as any);
@@ -26,8 +29,11 @@ import { startRealtimeEmitter } from './utils/realtimeEmitter';
   await registerAnalyticsRoutes(app);
 
   startRealtimeEmitter(io);
-  io.on('connection', (s) => app.log.info(`Socket connected ${s.id}`));
+
+  io.on('connection', s => app.log.info(`Socket connected ${s.id}`));
 
   const PORT = Number(process.env.PORT || 4000);
-  server.listen({ port: PORT }, () => app.log.info(`Server running on ${PORT}`));
+  server.listen({ port: PORT }, () =>
+    app.log.info(`🚀 Server ready on ${PORT}`),
+  );
 })();
